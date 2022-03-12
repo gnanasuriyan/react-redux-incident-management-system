@@ -1,28 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import App from './containers/app/App';
-import LoginContainer from './containers/login/login.containet';
-import NewIncidentContainer from './containers/incident/new.incident.container';
-import IncidentDetailsContainer from './containers/incident/incident.details.container';
-import IncidentListContainer from './containers/incident/incident.list.container';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+
+import history from '../src/utils/history';
+import configureStore from './configure.store';
+
+import App from './containers/app/loadable.app';
 import 'antd/dist/antd.css';
 import './index.css';
 
+// Create redux store with history
+const initialState = {};
+const store = configureStore(initialState, history);
+
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<App />} />
-      <Route path='login' element={<LoginContainer />} />
-      <Route path='incidents' element={<IncidentListContainer />} />
-      <Route path='incidents/new' element={<NewIncidentContainer />} />
-      <Route path='incidents/:incidentId' element={<IncidentDetailsContainer />} />
-    </Routes>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('root')
 );
-
