@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import App from './containers/app/App';
+import LoginContainer from './containers/login/login.containet';
+import NewIncidentContainer from './containers/incident/new.incident.container';
+import IncidentDetailsContainer from './containers/incident/incident.details.container';
+import IncidentListContainer from './containers/incident/incident.list.container';
+import 'antd/dist/antd.css';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App />} />
+      <Route path='login' element={<LoginContainer />} />
+      <Route path='incidents' element={<IncidentListContainer />} />
+      <Route path='incidents/new' element={<NewIncidentContainer />} />
+      <Route path='incidents/:incidentId' element={<IncidentDetailsContainer />} />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
