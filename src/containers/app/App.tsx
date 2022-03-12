@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import LoginContainer from '../login/loadable.login.container';
-import IncidentListContainer from '../incidents/incident.list.container';
+import IncidentListContainer from '../incidents/loadable.incident.list.container';
 import LoaderComponent from '../../components/loader/loader';
 
 import { useInjectReducer } from '../../utils/inject.reducer';
