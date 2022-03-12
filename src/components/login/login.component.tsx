@@ -1,22 +1,15 @@
 import { Form, Input, Button, Checkbox } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const LoginFormComponent = () => {
-  const [loading, setLoading] = useState(false);
+const LoginFormComponent = ({
+  isLoading,
+  error,
+  doLogin
+}: any) => {
   const [loginForm] = Form.useForm();
-
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    doLogin(values);
   };
-
-  const onFinishFailed = (errorInfo: any) => {
-    setLoading(false);
-    console.log('Failed:', errorInfo);
-  };
-
-  const onSubmitCapture = () => {
-    setLoading(true);
-  }
 
   return (
     <Form
@@ -25,8 +18,6 @@ const LoginFormComponent = () => {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 8 }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      onSubmitCapture={onSubmitCapture}
       autoComplete="off"
     >
       <Form.Item
@@ -46,10 +37,17 @@ const LoginFormComponent = () => {
       </Form.Item>
 
      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit" loading={loading}>
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Login
         </Button>
       </Form.Item>
+      {
+        error && (
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }} >
+              <span className='error-message'>{error}</span>
+          </Form.Item>
+        )
+      }
     </Form>
   );
 };

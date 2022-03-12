@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import LoginContainer from '../login/login.containet';
+import LoginContainer from '../login/loadable.login.container';
 import IncidentListContainer from '../incidents/incident.list.container';
 import LoaderComponent from '../../components/loader/loader';
 
